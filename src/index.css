@@ -1,13 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
+/*
+ * "Fresh teal" design tokens.
+ * Tailwind v4 has no tailwind.config.js: `@theme static` emits every token
+ * below as a CSS variable on :root AND maps it to Tailwind utilities
+ * (e.g. --color-primary -> bg-primary / text-primary / border-primary).
+ */
+@theme static {
+    --color-bg: #F0FDFA;              /* page background */
+    --color-surface: #FFFFFF;         /* cards, inputs, modals */
+    --color-surface-tint: #E3F7F3;    /* category strip, soft sections, image placeholders */
+    --color-primary: #0F766E;         /* header, headings accents, selected states */
+    --color-primary-hover: #115E59;
+    --color-primary-soft: #CCFBF1;    /* banner background, hover tints */
+    --color-primary-soft-2: #99F6E4;  /* banner diamond shape, highlights */
+    --color-accent: #F97316;          /* main call-to-action buttons, sale badges, cart count */
+    --color-accent-hover: #EA580C;
+    --color-on-primary: #FFFFFF;
+    --color-on-accent: #FFFFFF;
+    --color-text: #0F172A;
+    --color-text-muted: #4B6B68;
+    --color-border: #CDEDE8;
+    --color-focus: #14B8A6;
+    --color-footer: #134E4A;
+    --color-footer-link-hover: #5EEAD4; /* footer link hover */
+    --color-success: #0F766E;
+    --color-danger: #DC2626;
+    --color-star: #F59E0B;
+
+    /* Soft, teal-tinted shadows derived from the primary token */
+    --shadow-card: 0 4px 14px color-mix(in srgb, var(--color-primary) 8%, transparent);
+    --shadow-card-hover: 0 10px 24px color-mix(in srgb, var(--color-primary) 14%, transparent);
+}
 
 body{
     font-family: "poppins";
+    background-color: var(--color-bg);
+    color: var(--color-text);
     /* height: 100%;
     width: 100%;
     background-color: rgb(255, 227, 174); */
 }
+
+/* Layered as "base" so per-component Tailwind utilities can override them */
+@layer base {
+    ::selection{
+        background-color: var(--color-primary-soft);
+        color: var(--color-text);
+    }
+
+    /* Visible keyboard focus ring on every interactive element */
+    :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible{
+        outline: 2px solid var(--color-focus);
+        outline-offset: 2px;
+    }
+    /* On the dark teal header/footer a white ring is far more visible */
+    :where(header, footer) :where(a, button, [tabindex]):focus-visible{
+        outline-color: var(--color-on-primary);
+    }
+}
+
+/* Banner slider dots (react-slick / slick-theme overrides) */
+.slick-dots li button:before{
+    color: var(--color-text-muted);
+    opacity: 0.35;
+}
+.slick-dots li.slick-active button:before{
+    color: var(--color-primary);
+    opacity: 1;
+}
+.slick-dots li button:hover:before,
+.slick-dots li button:focus-visible:before{
+    color: var(--color-primary);
+    opacity: 0.75;
+}
+
 .bg{
     background: url(../src/assets/Sale.png);
     /* background-size: cover;        */
