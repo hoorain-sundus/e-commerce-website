@@ -24,7 +24,7 @@ function Navbar() {
 
         <Link to="/" className="flex items-center gap-2">
           <img
-            src="/logo.png"
+            src="/shopsphere-logo-light.svg"
             alt="logo"
             className=" w-16 h-16 object-contain bg-surface rounded-full p-0.5"
           />
@@ -50,7 +50,7 @@ function Navbar() {
         {/* Right Side Icons */}
         <div className="flex items-center gap-4 relative">
           {/* Cart */}
-         
+
 
           {/* User Dropdown */}
           <User
@@ -125,7 +125,7 @@ function Navbar() {
               onChange={(e) => dispatch(setSearchTerm(e.target.value))}
             />
           </form>
-           <Link to="/cart" className="relative rounded-full">
+          <Link to="/cart" className="relative rounded-full">
             <ShoppingCart className="w-10 h-10 bg-surface text-primary rounded-full p-2 hover:bg-primary-soft active:bg-primary-soft-2 transform hover:scale-110 transition duration-300" />
             {itemCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-accent text-text font-bold text-xs rounded-full w-5 h-5 flex items-center justify-center">
